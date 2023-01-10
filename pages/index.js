@@ -1,17 +1,25 @@
-// import Head from "next/head";
-// import styles from "../styles/Home.module.css";
-import Link from "next/link";
 import Head from "next/head";
-
-export default function Home() {
+import Movies from "../components/movies";
+export default function Home({ movies }) {
   return (
     <>
       <Head>
-        <title>Home</title>
+        <title>Popular Movies</title>
       </Head>
-      <h1 className="title">
-        Read <Link href="/posts/first-post">this page!</Link>
-      </h1>
+      <Movies movies={movies} />
     </>
   );
+}
+
+export async function getStaticProps() {
+  const API_URL =
+    "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=3fd2be6f0c70a2a598f084ddfb75487c&page=1";
+  const responce = await fetch(API_URL);
+  const movies = await responce.json();
+
+  return {
+    props: {
+      movies,
+    },
+  };
 }
