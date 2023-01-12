@@ -1,20 +1,27 @@
 import Head from "next/head";
 
-export default function FilmDetay({ movie }) {
-  console.log(movie);
+export default function MovieDeail({ movie }) {
   return (
-    <div className="movie">
+    <>
       <Head>
         <title>{movie.title}</title>
       </Head>
-      <div>
+      <div className="movie-page">
         <img
+          id="movie-img"
           src={`https://www.themoviedb.org/t/p/original${movie.backdrop_path}`}
         />
+        <div className="movie-detail">
+          <div className="movie-title">
+            <h1 id="movie-title">{movie.title}</h1>
+            <span className="movie-average">
+              {movie.vote_average.toFixed(1)}
+            </span>
+          </div>
+          <p className="movie-overview">{movie.overview}</p>
+        </div>
       </div>
-      <h3>{movie.title}</h3>
-      <div className="summary">{movie.overview}</div>
-    </div>
+    </>
   );
 }
 
@@ -30,3 +37,4 @@ export async function getServerSideProps({ params }) {
     },
   };
 }
+
