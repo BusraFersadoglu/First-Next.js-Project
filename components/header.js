@@ -1,15 +1,18 @@
 import Link from "next/link";
-
-export default function Header() {
+import "./Header.module.css";
+import Button from "../components/button";
+export default function Header({ theme, setTheme }) {
   return (
-    <header>
+    <header id="header" className={theme}>
       <nav>
-        <ul>
+        <ul id="navbar-ul">
           <li>
-            <Link href="/">Home</Link>
+            <Link href="/" className="home-tag">
+              Home
+            </Link>
           </li>
           <li>
-            <Link href="/movies">About</Link>
+            <Button theme={theme} setTheme={setTheme} />
           </li>
         </ul>
       </nav>
